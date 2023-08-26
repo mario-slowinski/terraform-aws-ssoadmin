@@ -7,7 +7,7 @@ variable "account_assignments" {
     target_id          = optional(string) # An AWS account identifier, typically a 10-12 digit string.
     target_type        = optional(string) #  The entity type for which the assignment will be created. Valid values: AWS_ACCOUNT.
   }))
-  description = "Single Sign-On (SSO) Account Assignment resource"
+  description = "List of Single Sign-On (SSO) Account Assignments."
   default = [{
     principal_id   = null,
     principal_type = null,
