@@ -1,7 +1,11 @@
 resource "aws_ssoadmin_account_assignment" "principal" {
   for_each = {
     for account_assignment in var.account_assignments :
-    account_assignment.principal_id => account_assignment
+    join(":", [
+      account_assignment.principal_id,
+      account_assignment.principal_type,
+      account_assignment.permission_set_arn,
+    ]) => account_assignment
     if account_assignment.principal_id != null
   }
 
