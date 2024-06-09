@@ -6,7 +6,7 @@ resource "aws_ssoadmin_permission_set" "name" {
   }
 
   description      = each.value.description
-  instance_arn     = coalesce(each.value.instance_arn, one(local.instances[*].arn))
+  instance_arn     = coalesce(each.value.instance_arn, local.instances[0].arn)
   name             = each.value.name
   relay_state      = each.value.relay_state
   session_duration = each.value.session_duration

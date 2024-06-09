@@ -5,8 +5,8 @@ resource "aws_ssoadmin_account_assignment" "principal" {
     if account_assignment.principal_id != null
   }
 
-  instance_arn       = coalesce(each.value.instance_arn, one(local.instances[*].arn))
-  permission_set_arn = each.value.permission_set_arn
+  instance_arn       = coalesce(each.value.instance_arn, local.instances[0].arn)
+  permission_set_arn = coalesce(each.value.permission_set_arn, local.permission_sets[0].arn)
   principal_id       = each.value.principal_id
   principal_type     = each.value.principal_type
   target_id          = coalesce(each.value.target_id, data.aws_caller_identity.current.account_id)
