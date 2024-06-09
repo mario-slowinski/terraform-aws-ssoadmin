@@ -5,6 +5,7 @@ resource "aws_ssoadmin_account_assignment" "principal" {
       account_assignment.principal,
       account_assignment.principal_type,
       account_assignment.permission_set,
+      coalesce(account_assignment.target_id, data.aws_caller_identity.current.account_id)
     ]) => account_assignment
     if account_assignment.principal != null
   }
