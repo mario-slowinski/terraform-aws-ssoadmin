@@ -14,5 +14,5 @@ resource "aws_ssoadmin_account_assignment" "principal" {
   principal_id       = each.value.principal_id
   principal_type     = each.value.principal_type
   target_id          = coalesce(each.value.target_id, data.aws_caller_identity.current.account_id)
-  target_type        = each.value.target_type
+  target_type        = each.value.target_type != null ? each.value.target_type : "AWS_ACCOUNT"
 }
