@@ -1,12 +1,12 @@
 resource "aws_ssoadmin_account_assignment" "principal" {
   for_each = {
-    for account_assignment in var.account_assignments :
+    for index, account_assignment in var.account_assignments :
     join(":", [
-      account_assignment.principal_id,
+      account_assignment.principal,
       account_assignment.principal_type,
       account_assignment.permission_set_arn,
     ]) => account_assignment
-    if account_assignment.principal_id != null
+    if account_assignment.principal != null
   }
 
   instance_arn       = coalesce(each.value.instance_arn, local.instances[0].arn)
